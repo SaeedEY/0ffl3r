@@ -1,0 +1,197 @@
+div#container
+{
+   width: 994px;
+   position: relative;
+   margin: 0 auto 0 auto;
+   text-align: left;
+}
+body
+{
+   background-color: #FFFFFF;
+   color: #000000;
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 13px;
+   line-height: 1.1875;
+   margin: 0;
+   text-align: center;
+}
+#TopMenu
+{
+   border: 0px #C0C0C0 solid;
+   background-color: transparent;
+}
+#TopMenu ul
+{
+   list-style-type: none;
+   margin: 0;
+   padding: 0;
+}
+#TopMenu li
+{
+   float: left;
+   margin: 0;
+   padding: 0px 4px 0px 0px;
+   width: 80px;
+}
+#TopMenu a
+{
+   display: block;
+   float: left;
+   color: #666666;
+   border: 1px #C0C0C0 solid;
+   background-color: #EEEEEE;
+   background-image: none;
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 13px;
+   font-style: normal;
+   text-decoration: none;
+   width: 68px;
+   height: 26px;
+   padding: 0px 5px 0px 5px;
+   vertical-align: middle;
+   line-height: 26px;
+   text-align: center;
+}
+#TopMenu li:hover a, #TopMenu a:hover
+{
+   color: #666666;
+   background-color: #C0C0C0;
+   background-image: none;
+   border: 1px #C0C0C0 solid;
+}
+#TopMenu li.firstmain
+{
+   padding-left: 0px;
+}
+#TopMenu li.lastmain
+{
+   padding-right: 0px;
+}
+#TopMenu br
+{
+   clear: both;
+   font-size: 1px;
+   height: 0;
+   line-height: 0;
+}
+#SitesList ul
+{
+   list-style: none;
+   margin: 0;
+   padding: 0;
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 13px;
+}
+#SitesList li
+{
+   cursor: pointer;
+}
+#SitesList li div
+{
+   margin: 0px 0px 0px 0px;
+   padding: 10px 10px 10px 10px;
+   background-color: #A0A0A0;
+   border-style: solid;
+   border-width: 1px;
+   border-color: #A0A0A0;
+   position: relative;
+   left: 0;
+   top: 0;
+   height: 16px;
+}
+#SitesList li div:hover
+{
+   background-color: #666666;
+   border-style: solid;
+   border-width: 1px;
+   border-color: #666666;
+}
+#SitesList li a
+{
+   color: #EEEEEE;
+   font-weight: normal;
+   text-decoration: none;
+}
+#SitesList li a:hover
+{
+   color: #EEEEEE;
+   font-weight: normal;
+   text-decoration: none;
+}
+#SitesList li li
+{
+   cursor: auto;
+   padding: 2px 2px 2px 5px;
+   margin: 10px 10px 10px 10px;
+   height: 16px;
+   background-color: #EEEEEE;
+   border-style: solid;
+   border-width: 1px;
+   border-color: #C0C0C0;
+}
+#SitesList li li a
+{
+   color: #666666;
+   font-weight: normal;
+   text-decoration: none;
+}
+#SitesList li li:hover
+{
+   background-color: #C0C0C0;
+   border-style: solid;
+   border-width: 1px;
+   border-color: #C0C0C0;
+}
+#SitesList li li a:hover
+{
+   color: #666666;
+   font-weight: normal;
+   text-decoration: none;
+}
+#UserName
+{
+   color: #000000;
+   font-family: Tahoma;
+   font-weight: bold;
+   font-size: 13px;
+   text-align: left;
+}
+#Container
+{
+   background-color: #FAFAFA;
+   border: 1px #000000 groove;
+   -moz-border-radius: 3px;
+   -webkit-border-radius: 3px;
+   border-radius: 3px;
+}
+#ContainerTitle 
+{
+   background-color: transparent;
+   border: 0px #000000 solid;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#ContainerTitle div
+{
+   text-align: center;
+}
+#ContainerLine
+{
+   color: #A0A0A0;
+   background-color: #A0A0A0;
+   border-width: 0;
+   margin: 0;
+   padding: 0;
+}
+#Line1
+{
+   color: #A0A0A0;
+   background-color: #A0A0A0;
+   border-width: 0;
+   margin: 0;
+   padding: 0;
+}

@@ -1,0 +1,147 @@
+<?php
+if (session_id() == "")
+{
+   session_start();
+}
+?>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title><?php echo $TITLE;?></title>
+<!-- <link href="css/index.css" rel="stylesheet"> -->
+<meta charset="utf-8">
+<meta name="keywords" content="<?php echo $st->get('SITE_META_KEYWORDS');?>">
+<meta name="description" content="<?php echo $st->get('SITE_META_DESCRIPTION');?>">
+<!-- <meta http-equiv="refresh"> -->
+<link href="css/index.css" rel="stylesheet">
+<script src="js/jquery-1.11.1.min.js"></script>
+<script>
+   $(document).ready(function()
+   {
+      $(".SitesList_Folder div").click(function()
+      {
+         if ($(this).parent().find('ul').is(':hidden'))
+         {
+            $(this).parent().find('ul').show();
+         }
+         else
+         {
+            $(this).parent().find('ul').hide();
+         }
+      });
+   });
+   function deletes(id){
+      var ask = confirm("Are you Sure you want to delete id "+id);
+      if(ask){
+         var a = window.location.origin+window.location.pathname;
+         window.location = a + '?delete='+id;
+      }
+   }
+   function view(id){
+      var ask = confirm("Are you Sure to Open Archive "+id);
+      if(ask){
+         var a = window.location.origin+window.location.pathname;
+         window.location = a + '?view='+id;
+      }
+   }
+   function download(id){
+      var ask = confirm("Are you Sure to Open Archive "+id);
+      if(ask){
+         var a = window.location.origin+window.location.pathname;
+         window.location = a + '?download='+id;
+      }
+   }
+   function reset(){
+      var a = window.location.origin+window.location.pathname;
+      window.location = a ;
+      
+   }
+</script>
+</head>
+<body>
+<div id="container">
+<div id="TopMenu" style="position:absolute;left:637px;top:32px;width:338px;height:38px;z-index:2;">
+<ul>
+<li class="firstmain"><a href="?type=addnew" target="_self">Add&nbsp;new</a>
+</li>
+<li><a href="?type=viewall" target="_self">View&nbsp;all</a>
+</li>
+<li><a href="?type=deleteall" target="_self">Delete&nbsp;all</a>
+</li>
+<li><a href="?type=logout" target="_self">Logout</a>
+</li>
+</ul>
+<br>
+</div>
+<div id="SitesList" style="position:absolute;left:6px;top:32px;width:284px;height:549px;z-index:3;">
+<ul>
+   <?php
+   $datax = array();
+   $datas = $st->loadArchive(['SELECT_COLUMN'=>'*']); 
+   if(isset($datas['creation_time'])){
+      array_push($datax,$datas);
+   }else{
+      $datax = $datas;
+   }
+   foreach($datax as $site){?>
+   <li class="SitesList_Folder"><div><a><?php echo $site['site'];?></a></div>
+      <ul>
+         <li onclick="deletes(<?php echo $site['id'];?>)"><a>Delete</a></li>
+         <li onclick="view(<?php echo $site['id'];?>)"><a>View</a></li>
+         <li onclick="download(<?php echo $site['id'];?>)"><a>Download</a></li>
+      </ul>
+   </li>
+   <?php  }?>
+</ul>
+</div>
+<div id="UserName" style="position:absolute;left:327px;top:32px;width:315px;height:23px;z-index:4;">
+<span id="UserName">Welcome <b><?php
+if (isset($_SESSION['user'])){
+   echo $_SESSION['user'];
+}
+else{
+   header("location:./");
+}?></b>!</span></div>
+<div id="Container" style="position:absolute;overflow:auto;text-align:left;left:327px;top:85px;width:646px;height:482px;z-index:5;">
+<div id="ContainerTitle" style="position:absolute;left:201px;top:12px;width:249px;height:20px;text-align:center;z-index:0;">
+<span style="color:#000000;font-family:'Palatino Linotype';font-size:15px;"><u><?php echo $TITLE;?></u></span></div>
+<hr id="ContainerLine" style="position:absolute;left:92px;top:44px;width:464px;height:1px;z-index:1;">
+      <div style="padding:50px;font-family:Tohama;height:75%" >
+         <?php 
+         if(empty($_GET) and empty($_POST)){
+            $CONTENT = "SITE SPEED : ".intval($st->serverSpeed())." KB/s"."<br>";
+            $CONTENT.= "SERVER IP  : ".$_SERVER['SERVER_ADDR']."<br>";
+            $CONTENT.= "SERVER LOCATION  : "."GERMANY";
+            echo $CONTENT;
+         }elseif(isset($_GET['view'])){
+            $id = $_GET['view'];
+            $CONTENT = $st->loadArchive(["SELECT_COLUMN"=>'*',"ID"=>$id]);
+            echo "<p>ADD TIME : ".$CONTENT[0]['creation_time']."</p>";
+            echo "<p>SITE NAME : ".$CONTENT[0]['site']."</p>";
+            echo "<p><a href='?open=".$CONTENT[0]['id']."'>OPEN OFFLINE ".$CONTENT[0]['site']."</a></p>";
+            echo "<p><a href='?download=".$CONTENT[0]['id']."'>DOWNLOAD OFFLINE ".$CONTENT[0]['site']."</a></p>";
+            echo "<p>NOTE : ".$CONTENT[0]['note']."</p><br>";
+            echo "<div><img src='".$of->ARCHIVES_DIR.$CONTENT[0]['dir']."screenshot.jpg'/></div>";
+         }elseif(isset($_GET['open'])){
+            $id = $_GET['open'];
+            $CONTENT = $st->loadArchive(["SELECT_COLUMN"=>'*',"ID"=>$id]);
+            echo "<iframe src='".$CONTENT[0]['dir']."' style='width:100%;height:100%;'></iframe>";
+         }elseif(isset($_GET['type']) and strtolower($_GET['type']) == 'addnew'){
+            echo "<form style='margin-left:50px;margin-top:50px;font-size: 17px;font-weight: 900;' method='post' action='procces.php'>";
+            echo "<label style='float:left;'>Site: </label>";
+            echo "<input style='margin: 10px;float:right;' type='site' name='sitename' placeholder='Site Link'/><br><br><br>";
+            echo "<!--<label style='float:left;'>Directory(optional): </label>";
+            echo "<input style='margin: 10px;float:right;' type='directory' name='archivename' placeholder='Archive Name'/><br><br><br>-->";
+            echo "<label style='float:left;'>Offline whole Site(OFF): </label>";
+            echo "<input style='margin: 10px;float:right;' type='checkbox' name='wholesite' unchecked/><br><br><br>";
+            echo "<input type='hidden' name='type' value='addnew'/>";
+            echo "<input style='margin: 10px;' type='submit' name='submit' value='Archive'/><br>";
+            echo "</form>";
+         }?>
+      </div>
+</div>
+<hr id="Line1" style="position:absolute;left:327px;top:70px;width:646px;height:1px;z-index:6;">
+</div>
+</body>
+</html>

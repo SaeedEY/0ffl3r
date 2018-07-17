@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title><?php echo $st->get("SITE_TITLE");?></title>
+    <link rel="stylesheet" href="css/pure-min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    <style>
+        body {background:url("images/doodles.png")}
+        .input {width:100%;color:black;}<?php if(isset($_GET['failed'])){?>
+        .error {background: red;font-color:black;font-family: monospace;border:solid 1px darkred;border-radius: 5px;text-align: center;}
+        <?php } ?>*{font-family: 'Open Sans', sans-serif;}
+    </style>
+</head>
+<body>
+
+<div class="pure-g" style="margin:0 auto">
+    <div class="pure-u-1-3" style="color:#ecf0f1;margin:0 auto;position: relative;">
+        <form action="<?php echo $st->get('SITE_LOGIN_PAGE');?>" method="post" class="pure-form pure-form-stacked" style="text-align:left;position: absolute;margin-top:30%;
+           padding:17%;background-color:#27ae60;border-radius:1.2em">
+            <fieldset>
+                <legend><h1 style="text-size:1.3em;margin:5%;color:#ecf0f1;text-align:center;">Login Form</h1></legend><?php if(isset($_GET['failed'])){?>
+                <div class="error"><h3>Login Failed !</h3></div>
+                <?php } ?><label for="username">Email: </label>
+                <input type="text" id="username" placeholder="John@doe.com" class="input" name="uname">
+        <label for="password">Password: </label>
+        <input id="password" type="password" placeholder="Password" class="input" name="pass">
+<button class="pure-button" style="float:right;padding:10px 40px;margin-top:5%;background-color:#3498db;border-radius:6px">Login</button>
+            </fieldset>
+        </form>    
+    </div>
+</div>
+</body>
+</html>
